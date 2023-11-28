@@ -1,0 +1,41 @@
+.div-celular {
+    border: 1px solid gray;
+    width: 200px;
+    height: 280px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: gainsboro;
+    /* float: inline-end; */
+    align-items: center;
+    display: inline-table;
+}
+
+.div-celular img {
+    width: 100px;
+}
+
+li {
+    list-style-type: none;
+    padding: 5px;
+    /* border: 1px solid; */
+  }
+
+ul {
+    text-align: center;
+    /* border: 1px solid; */
+    padding: 5px;
+}
+
+.carrinho{
+    border: 1px solid;
+
+}
+
+.corpo {
+    text-align: center;
+    /* border: 1px solid; */
+}
+
+.celulares {
+    float: left;
+}
