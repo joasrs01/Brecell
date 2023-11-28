@@ -25,10 +25,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link active" href="View">Carrinho</a>
-          <a class="nav-link active" href="#">Perfil</a>
-          <a class="nav-link disabled" aria-disabled="true">Quem somos</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link active" href="index.php?acao=carrinho">Carrinho</a>
+          <a class="nav-link active" href="index.php?acao=perfil">Perfil</a>
         </div>
       </div>
     </div>
