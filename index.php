@@ -1,6 +1,6 @@
 <?php 
   require_once('templates/cabecalho.php');
-  require_once('Lib/biblioteca.php');
+  require_once('lib/biblioteca.php');
 
   $acao = $_GET['acao'] ?? 'nenhuma';
 

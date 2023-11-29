@@ -3,11 +3,15 @@
     $hostname='127.0.0.1';
 	$username='root';
 	
-    define('MySql', mysqli_connect($hostname,$username, '') );
-	mysqli_select_db(MySql, "DB_BRECELL");
+    define('Conexao', mysqli_connect($hostname,$username, '') );
+	mysqli_select_db(Conexao, "DB_BRECELL");
+
+    function Comando( $sSql ){
+        return mysqli_query(Conexao, $sSql);
+    }
 
     function Select($sSql){
-        $resultado = mysqli_query(MySql, $sSql);
+        $resultado = Comando($sSql);
         $arrRetorno = [];
 
         if($resultado){
@@ -17,4 +21,30 @@
         }
 
         return $arrRetorno;
+    }
+
+    function AtualizarDB( $arrValores, $sTabela ){
+        $arrColunas = Select("SHOW COLUMNS FROM $sTabela");
+        $sComandoInsert = "INSERT INTO $sTabela";
+        $sComandoValues = "VALUES";
+        $sValoresColuna = '';
+        $sVirgulaColuna = '';
+        $sValores = '';
+        $sVirgula = '';
+
+        foreach( $arrValores as $coluna => $valor ){
+            foreach( $arrColunas as $linhaColuna ){
+                if( $coluna == $linhaColuna['Field'] ){
+                    $sValoresColuna = $sValoresColuna.$sVirgulaTabela.$linhaColuna['Field'];
+                    $sVirgulaTabela = ', ';
+                }
+            }
+        }
+
+        foreach( $arrValores as $linha ){
+            $sValores = $sValores.$sVirgula.$valor;
+            $sVirgula = ', ';
+        }
+
+        Comando( "INSERT INTO $sTabela ($sValoresColuna) "  );
     }
