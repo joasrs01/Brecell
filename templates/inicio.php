@@ -1,3 +1,5 @@
+<?php require_once('templates/cabecalho.php');?>
+
 <div class="corpo">
     <h2>Catálogo</h2>
     <?php
@@ -22,3 +24,5 @@
     }
     ?>
 </div>
+
+<?php require_once('templates/rodape.php');?>

@@ -1,3 +1,5 @@
+<?php require('templates/cabecalho.php');?>
+
 <form method="post" action="?acao=acessar">
     <div>
         <h1 class="h3 mb-3 font-weight-normal"></h1>
@@ -11,3 +13,5 @@
         <a class="btn btn-primary" href="index.php?acao=novo-usuario">Cadastrar</a>
     </div>
 </form>
+
+<?php require('templates/rodape.php');?>

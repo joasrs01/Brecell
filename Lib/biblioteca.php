@@ -8,3 +8,11 @@ function BuscarCelulares(){
     $sSql = $sSql.' INNER JOIN MARCA ON MARCA.COD_MARCA = CELULAR.COD_MARCA';
     return Select($sSql);
 }
+
+function Codifica($sTexto){
+    return base64_encode($sTexto);
+}
+
+function Decodifica($sTexto){
+    return base64_decode($sTexto);
+}

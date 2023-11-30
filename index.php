@@ -1,28 +1,27 @@
 <?php 
-  require_once('templates/cabecalho.php');
-  require_once('lib/biblioteca.php');
+  require_once('lib/controller.php');
 
-  $acao = $_GET['acao'] ?? 'nenhuma';
-
-  switch($acao){
+ switch($_GET['acao'] ?? 'nenhuma'){
     case 'nenhuma':
-      include_once('templates/inicio.php');
+      CarregarPaginaInicial();
       break;
     case 'carrinho':
-      include_once('templates/carrinho.php');
+      CarregarCarrinho();
       break;
     case 'perfil':
-      include_once('templates/perfil.php');
+      CarregarPerfil();
       break;
     case 'login':
-      include_once('templates/login.php');
+      CarregarLogin();
       break;
     case 'cadastro-usuario':
-        include_once('templates/cadastroUsuario.php');
-        break;
+      CarregarCadastroUsuario();
+      break;
+    case 'cadastrar-usuario':
+      CadastrarUsuario();
+      break;
     case 'cadastro-produto':
-      include_once('templates/cadastroProduto.php');
+      CarregarCadastroProduto();
       break;
   }
-
-  require_once('templates/rodape.php');
+?>
