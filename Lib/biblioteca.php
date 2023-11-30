@@ -16,3 +16,10 @@ function Codifica($sTexto){
 function Decodifica($sTexto){
     return base64_decode($sTexto);
 }
+
+function InserirUsuario($sNome, $sLogin, $sSenha, $tipUsuario){
+    $sSql = "INSERT INTO USUARIO ( NOM_USUARIO, LOGIN, SENHA, TIP_USUARIO ) ";
+    $sSql = $sSql."VALUES ('$sNome', '$sLogin', '".Codifica($sSenha)."', '$tipUsuario')";
+
+    Comando( $sSql );
+}

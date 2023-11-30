@@ -15,9 +15,9 @@
 <body>
 <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="index.php">
         <img src="resources/celular.ico" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        Brechó do celular
+        Brechó do Celular
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

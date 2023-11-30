@@ -28,7 +28,8 @@ function CarregarCadastroProduto(){
 }
 
 function CadastrarUsuario(){
-    
+    InserirUsuario($_POST['nome'], $_POST['login'], $_POST['senha'], $_POST['tipo-usuario']);
+    header('location: index.php');
 }
 
 function CadastrarProduto(){
