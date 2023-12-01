@@ -23,5 +23,14 @@
     case 'cadastro-produto':
       CarregarCadastroProduto();
       break;
+    case 'cadastrar-produto':
+      CadastrarProduto();
+      break;
+    case 'acessar':
+      Login();
+      break;
+    case 'logoff':
+      Logoff();
+      break;
   }
 ?>

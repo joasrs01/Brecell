@@ -2,7 +2,6 @@
 
 require_once('database.php');
 session_start();
-$usuarioLogado = isset($_SESSION['usuario']);
 
 /// Método irá retornar um array com os celulares
 function BuscarCelulares(){
@@ -12,7 +11,7 @@ function BuscarCelulares(){
 }
 
 function BuscarUsuarios(){
-    return Select("SELECT COD_USUARIO, NOM_USAURIO, LOGIN, SENHA, TIP_USUARIO FROM USUARIO");
+    return Select('SELECT COD_USUARIO, NOM_USUARIO, LOGIN, SENHA, TIP_USUARIO FROM USUARIO');
 }
 
 function Codifica($sTexto){
@@ -27,27 +26,34 @@ function InserirUsuario($sNome, $sLogin, $sSenha, $tipUsuario){
     $sSql = "INSERT INTO USUARIO ( NOM_USUARIO, LOGIN, SENHA, TIP_USUARIO ) ";
     $sSql = $sSql."VALUES ('$sNome', '$sLogin', '".Codifica($sSenha)."', '$tipUsuario')";
 
-    Comando( $sSql );
+    if(Comando( $sSql )){
+        SetarSessaoUsuario( $sNome, $sLogin, $tipUsuario );
+    }
 }
 
 function AutenticarUsuario( $login, $senha ){
     $usuarios = BuscarUsuarios();
-    $bAutenticado = false;
-
+    
     foreach ($usuarios as $user) {
         if( $user['LOGIN'] == $login && Decodifica($user['SENHA']) == $senha ){
-            $_SESSION['tipUsuario'] = $user['TIP_USUARIO'];
-            $_SESSION['nome'] = $user['NOM_USUARIO'];
-            $bAutenticado = true;
-            break;
+            SetarSessaoUsuario( $user['NOM_USUARIO'], $user['LOGIN'], $user['TIP_USUARIO'] );
+            return true;
         }
     }  
 
-    return $bAutenticado;
+    return false;
 }
 
-function Logoff(){
-    unset($_SESSION['usuario']);
+function SetarSessaoUsuario( $snome, $slogin ,$tipUsuario ){
+    $_SESSION['NOM_USUARIO'] = $snome;
+    $_SESSION['USUARIO'] = $slogin;
+    $_SESSION['TIP_USUARIO'] = $tipUsuario;
+}
+
+function FinalizarSessaoUsuario(){
+    unset($_SESSION['TIP_USUARIO']);
+    unset($_SESSION['NOM_USUARIO']);
+    unset($_SESSION['USUARIO']);
 }
 
 function InserirMensagem($mensagem, $tipo = 'success') {
@@ -64,4 +70,64 @@ function LerMensagem() {
         return $mensagem;
     } 
     return false;
+}
+
+function UsuarioLogado(){
+    return isset($_SESSION['USUARIO']);
+}
+
+function UsuarioRepresentante(){
+    return $_SESSION['TIP_USUARIO'] == 'rep';
+}
+
+function ProcessarImagem( $imagemParametro, $imagemOriginal = '' ){
+
+    $imgRetorno = $imagemOriginal;
+
+    if (isset($imagemParametro) && $imagemParametro['error'] == 0) {
+        $temp = $imagemParametro['tmp_name'];
+        $nome = time().'-'.sha1_file($temp);
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+        $fileInfo = $finfo->file($temp);
+
+        $extensoes = [
+            'jpeg' => 'image/jpeg',
+            'jpg' => 'image/jpg',
+            'png' => 'image/png'
+        ];
+        if( !empty($imagemOriginal) ){
+            unlink($imagemOriginal);
+        }
+
+        $extensao = array_search($fileInfo, $extensoes);
+        $imgRetorno = ARQUIVOS.$nome.'.'.$extensao;ARQUIVOS.$nome.'.'.$extensao;
+        move_uploaded_file($temp,$imgRetorno);
+    }
+
+    return $imgRetorno;
+}
+
+function ValidarImagem( $imagemParametro ){
+
+    $msgRetorno = '';
+
+    if ( isset( $imagemParametro) && $imagemParametro['error'] == 0 ) {
+        // logica para o tamanho, mas eu não qual é 
+        // desculpa :/
+    }  
+    else{
+        $msgRetorno = 'imagem nao informada';
+    }
+    
+    if( !empty(trim($msgRetorno)) ){
+        inserirMensagem($msgRetorno, "danger");
+        return false;
+    }
+
+    return true;
+}
+
+function CadastrarProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+
 }

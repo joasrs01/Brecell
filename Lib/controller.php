@@ -4,7 +4,6 @@ require_once('lib/biblioteca.php');
 
 function CarregarPaginaInicial(){
     include('templates/inicio.php');
-    // fetch('templates/listaTarefas.html');
 }
 
 function CarregarCarrinho(){
@@ -33,14 +32,22 @@ function CadastrarUsuario(){
 }
 
 function CadastrarProduto(){
-
+    CadastrarProduto($_POST["nome"], $_POST["marca"], $_POST["preco"], $_POST["imagem"]);
 }
 
 function Login(){
-
+    if(AutenticarUsuario( $_POST['usuario'], $_POST['senha'] )){
+        InserirMensagem('Bem vindo '.$_SESSION['NOM_USUARIO']);
+        header('location: index.php');
+    }
+    else{
+        InserirMensagem('Usuário ou senha incorreto.', 'error');
+        header('location: index.php?acao=login');
+    }
 }
 
-function Logout(){
-    
+function Logoff(){
+    FinalizarSessaoUsuario();
+    header('location: index.php');
 }
 

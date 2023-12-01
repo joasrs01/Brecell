@@ -20,28 +20,35 @@
   <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-        <img src="resources/sistema/celular.ico" alt="Logo" width="30" height="24"class="d-inline-block align-text-top">
+        <img src="resources/sistema/celular.ico" alt="Logo" width="30" height="24"
+          class="d-inline-block align-text-top">
         Brechó do Celular
       </a>
       <?php
-        if ($usuarioLogado) {
-          ?>
-          <label>
-            <?= $_SESSION['nome'] ?>
-          </label> |
-          <label>
-            <?= $_SESSION['tipo'] ?>
-          </label> |
+      if (UsuarioLogado()) {
+        ?>
+        <label>
+          <?= $_SESSION['NOM_USUARIO']?>
+        </label> |
+        <div>
           <a class="btn btn-danger" href="index.php?acao=logoff">Logoff</a>
           <?php
-        } else {
+            if (UsuarioRepresentante()) {
+              ?>
+                <a class="btn btn-success" href="index.php?acao=cadastro-produto">Cadastrar Produtos</a>
+              <?php
+            }
           ?>
-          <div>
-            <a class="btn btn-success" href="index.php?acao=login">Login</a>
-            <a class="btn btn-success" href="index.php?acao=cadastro-usuario">Cadastre-se</a>
-          </div>
-          <?php
-        }
+        </div>
+        <?php
+      } else {
+        ?>
+        <div>
+          <a class="btn btn-success" href="index.php?acao=login">Login</a>
+          <a class="btn btn-success" href="index.php?acao=cadastro-usuario">Cadastre-se</a>
+        </div>
+        <?php
+      }
       ?>
       <div id="div-carrinho">
         <img id="img-carrinho" src="resources/sistema/carrinho.png" />
@@ -60,3 +67,13 @@
       </div> -->
     </div>
   </nav>
+  <?php
+  $mensagem = lerMensagem();
+  if ($mensagem !== false) {
+    ?>
+    <div class="alert alert-<?= $mensagem['tipo'] ?>" role="alert">
+      <?= $mensagem['mensagem'] ?>
+    </div>
+    <?php
+  }
+  ?>

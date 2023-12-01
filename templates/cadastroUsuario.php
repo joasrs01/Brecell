@@ -21,7 +21,6 @@
                 <label class='form-label' for="super-adm">Cliente</label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
-            <div class="cadastrar-usuario">
     </form>
 </div>
 
