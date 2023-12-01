@@ -39,3 +39,26 @@ ul {
 .celulares {
     float: left;
 }
+
+#img-carrinho {
+    width: 30px;
+}
+
+#qtd-itens-carrinho {
+    color: black;
+    size: 15px;
+}
+
+#div-carrinho {
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 3.5px;
+}
+
+#div-carrinho:hover{
+    background-color: #565656;
+}
+
+#div-carrinho:target {
+    background-color: #727272;
+}

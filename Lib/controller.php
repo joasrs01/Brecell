@@ -35,3 +35,12 @@ function CadastrarUsuario(){
 function CadastrarProduto(){
 
 }
+
+function Login(){
+
+}
+
+function Logout(){
+    
+}
+
