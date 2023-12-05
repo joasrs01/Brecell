@@ -32,7 +32,15 @@ function CadastrarUsuario(){
 }
 
 function CadastrarProduto(){
-    CadastrarProduto($_POST["nome"], $_POST["marca"], $_POST["preco"], $_POST["imagem"]);
+
+    if(ValidarImagem($_FILES["imagem"]) && InserirProduto($_POST["nome"], $_POST["marca"], $_POST["preco"], ProcessarImagem($_FILES["imagem"]))){
+        InserirMensagem('Produto '.$_POST['nome'].' cadastrado com sucesso!');
+    }
+    else{
+        InserirMensagem('Não foi possível cadastrar o produto', 'error');        
+    }
+
+    header('location: index.php?acao=cadastro-produto');
 }
 
 function Login(){

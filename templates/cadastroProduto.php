@@ -2,7 +2,7 @@
 
 <div class="cadastrar-usuario">
     <h1>Cadastro de produto</h1>
-    <form method="post" action="?acao=cadastrar-usuario">
+    <form method="post" action="?acao=cadastrar-produto" enctype="multipart/form-data">
         <div id="">
             <label for="nome" class="sr-only">Nome produto</label>
             <input style="width: 550px;" type="text" name="nome" class="form-control" placeholder="Nome produto"

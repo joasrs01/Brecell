@@ -128,6 +128,9 @@ function ValidarImagem( $imagemParametro ){
     return true;
 }
 
-function CadastrarProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+    $sSql = "INSERT INTO CELULAR ( DES_CELULAR, VAL_PRECO, CAM_IMAGEM, COD_MARCA ) ";
+    $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, $imgProduto, $iMarcaProduto)";
 
+    return Comando( $sSql );
 }

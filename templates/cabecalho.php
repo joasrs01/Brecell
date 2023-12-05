@@ -24,35 +24,33 @@
           class="d-inline-block align-text-top">
         Brechó do Celular
       </a>
-      <?php
-      if (UsuarioLogado()) {
-        ?>
-        <label>
-          <?= $_SESSION['NOM_USUARIO']?>
-        </label> |
-        <div>
+      <div>
+        <?php
+        if (UsuarioLogado()) {
+          ?>
+          <label>
+            <?= $_SESSION['NOM_USUARIO'] ?>
+          </label> |
           <a class="btn btn-danger" href="index.php?acao=logoff">Logoff</a>
           <?php
-            if (UsuarioRepresentante()) {
-              ?>
-                <a class="btn btn-success" href="index.php?acao=cadastro-produto">Cadastrar Produtos</a>
-              <?php
-            }
+          if (UsuarioRepresentante()) {
+            ?>
+            <a class="btn btn-success" href="index.php?acao=cadastro-produto">Cadastrar Produtos</a>
+            <?php
+          }
           ?>
-        </div>
-        <?php
-      } else {
-        ?>
-        <div>
+          <?php
+        } else {
+          ?>
           <a class="btn btn-success" href="index.php?acao=login">Login</a>
           <a class="btn btn-success" href="index.php?acao=cadastro-usuario">Cadastre-se</a>
+          <?php
+        }
+        ?>
+        <div id="div-carrinho">
+          <img id="img-carrinho" src="resources/sistema/carrinho.png" />
+          <label id="qtd-itens-carrinho">1</label>
         </div>
-        <?php
-      }
-      ?>
-      <div id="div-carrinho">
-        <img id="img-carrinho" src="resources/sistema/carrinho.png" />
-        <label id="qtd-itens-carrinho">1</label>
       </div>
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
