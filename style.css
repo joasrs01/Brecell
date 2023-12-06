@@ -62,3 +62,8 @@ ul {
 #div-carrinho:target {
     background-color: #727272;
 }
+
+#nome-usuario{
+    color: white;
+    font-size: large;
+}

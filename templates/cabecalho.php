@@ -28,7 +28,7 @@
         <?php
         if (UsuarioLogado()) {
           ?>
-          <label>
+          <label id="nome-usuario">
             <?= $_SESSION['NOM_USUARIO'] ?>
           </label> |
           <a class="btn btn-danger" href="index.php?acao=logoff">Logoff</a>

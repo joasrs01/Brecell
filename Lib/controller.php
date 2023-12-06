@@ -32,8 +32,7 @@ function CadastrarUsuario(){
 }
 
 function CadastrarProduto(){
-
-    if(ValidarImagem($_FILES["imagem"]) && InserirProduto($_POST["nome"], $_POST["marca"], $_POST["preco"], ProcessarImagem($_FILES["imagem"]))){
+    if(InserirProduto($_POST["nome"], $_POST["marca"], $_POST["preco"], ProcessarImagem($_FILES["imagem"]))){
         InserirMensagem('Produto '.$_POST['nome'].' cadastrado com sucesso!');
     }
     else{

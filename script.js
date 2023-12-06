@@ -2,7 +2,6 @@ console.log('teste');
 
 // document.querySelector('#adicionar-carrinho').addEventListener('click',AdicionarCarrinho);
 // document.querySelectorAll('#adicionar-carrinho').forEach(e => {e.addEventListener('click',AdicionarCarrinho);});
-document.querySelector('#cadastrar-marca').addEventListener('click',AbrirCadastroMarca);
 let itensCarrinho = document.querySelector("#itens-carrinho");
 let totalCarrinho = document.querySelector("#total");
 

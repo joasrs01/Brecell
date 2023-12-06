@@ -3,9 +3,12 @@
 require_once('database.php');
 session_start();
 
+define('IMAGENS','resources\imagens\\');
+define('ARQUIVO_LISTA','C:\xampp\htdocs\todoList\dados\todo.json');
+
 /// Método irá retornar um array com os celulares
 function BuscarCelulares(){
-    $sSql = 'SELECT CELULAR.DES_CELULAR, CELULAR.VAL_PRECO, CELULAR.CAM_IMAGEM, MARCA.DES_MARCA FROM CELULAR';
+    $sSql = 'SELECT CELULAR.COD_CELULAR, CELULAR.DES_CELULAR, CELULAR.VAL_PRECO, CELULAR.CAM_IMAGEM, MARCA.DES_MARCA FROM CELULAR';
     $sSql = $sSql.' INNER JOIN MARCA ON MARCA.COD_MARCA = CELULAR.COD_MARCA';
     return Select($sSql);
 }
@@ -36,8 +39,10 @@ function InserirUsuario($sNome, $sLogin, $sSenha, $tipUsuario){
 }
 
 function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+
+    $sCaminhoImagemCorrigido = str_replace('\\','\\\\',$imgProduto);
     $sSql = "INSERT INTO CELULAR ( DES_CELULAR, VAL_PRECO, CAM_IMAGEM, COD_MARCA ) ";
-    $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, $imgProduto, $iMarcaProduto)";
+    $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, '$sCaminhoImagemCorrigido', $iMarcaProduto)";
 
     return Comando( $sSql );
 }
@@ -112,36 +117,17 @@ function ProcessarImagem( $imagemParametro, $imagemOriginal = '' ){
         $extensoes = [
             'jpeg' => 'image/jpeg',
             'jpg' => 'image/jpg',
-            'png' => 'image/png'
+            'png' => 'image/png',
         ];
         if( !empty($imagemOriginal) ){
             unlink($imagemOriginal);
         }
 
-        $extensao = array_search($fileInfo, $extensoes);
-        $imgRetorno = ARQUIVOS.$nome.'.'.$extensao;ARQUIVOS.$nome.'.'.$extensao;
+        $extensaoTemp = array_search($fileInfo, $extensoes);
+        $extensao = !$extensaoTemp ? 'jpeg': $extensaoTemp;
+        $imgRetorno = IMAGENS.$nome.'.'.$extensao;IMAGENS.$nome.'.'.$extensao;
         move_uploaded_file($temp,$imgRetorno);
     }
 
     return $imgRetorno;
-}
-
-function ValidarImagem( $imagemParametro ){
-
-    $msgRetorno = '';
-
-    if ( isset( $imagemParametro) && $imagemParametro['error'] == 0 ) {
-        // logica para o tamanho, mas eu não qual é 
-        // desculpa :/
-    }  
-    else{
-        $msgRetorno = 'imagem nao informada';
-    }
-    
-    if( !empty(trim($msgRetorno)) ){
-        inserirMensagem($msgRetorno, "danger");
-        return false;
-    }
-
-    return true;
 }

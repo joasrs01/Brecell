@@ -14,9 +14,17 @@
                     </li>
                     <li><img src="<?= $celular['CAM_IMAGEM'] ?>" alt="imagem" /></li>
                     <li id="valor-item">
-                        <?= $celular['VAL_PRECO'] ?>
+                        R$ <?=(double)$celular['VAL_PRECO'] ?>
                     </li>
-                    <li><input id="adicionar-carrinho" type="button" value="+ Carrinho" /></li>
+                    <li><input id="<?= $celular['COD_CELULAR'] ?>" class="btn btn-primary" class="adicionar-carrinho" type="button" value="+ Carrinho" /></li>
+                    <?php
+                        if(UsuarioLogado() && UsuarioRepresentante()){
+                        ?>
+                            <li><input id="<?= $celular['COD_CELULAR'] ?>" class="btn btn-danger excluir-item" type="button" value="Excluir" /></li>
+                            <li><input id="<?= $celular['COD_CELULAR'] ?>" class="btn btn-secondary" class="editar-item" type="button" value="Editar" /></li>
+                        <?php
+                        }
+                    ?>
                 </ul>
             </div>
             <?php
