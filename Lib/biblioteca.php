@@ -14,6 +14,10 @@ function BuscarUsuarios(){
     return Select('SELECT COD_USUARIO, NOM_USUARIO, LOGIN, SENHA, TIP_USUARIO FROM USUARIO');
 }
 
+function BuscarMarcas(){
+    return Select('SELECT COD_MARCA, DES_MARCA FROM MARCA');
+}
+
 function Codifica($sTexto){
     return base64_encode($sTexto);
 }
@@ -29,6 +33,20 @@ function InserirUsuario($sNome, $sLogin, $sSenha, $tipUsuario){
     if(Comando( $sSql )){
         SetarSessaoUsuario( $sNome, $sLogin, $tipUsuario );
     }
+}
+
+function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+    $sSql = "INSERT INTO CELULAR ( DES_CELULAR, VAL_PRECO, CAM_IMAGEM, COD_MARCA ) ";
+    $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, $imgProduto, $iMarcaProduto)";
+
+    return Comando( $sSql );
+}
+
+function InserirMarca($sDescricaoMarca){
+    $sSql = "INSERT INTO MARCA ( DES_MARCA ) ";
+    $sSql = $sSql."VALUES ('$sDescricaoMarca')";
+
+    return Comando( $sSql );
 }
 
 function AutenticarUsuario( $login, $senha ){
@@ -126,11 +144,4 @@ function ValidarImagem( $imagemParametro ){
     }
 
     return true;
-}
-
-function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
-    $sSql = "INSERT INTO CELULAR ( DES_CELULAR, VAL_PRECO, CAM_IMAGEM, COD_MARCA ) ";
-    $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, $imgProduto, $iMarcaProduto)";
-
-    return Comando( $sSql );
 }

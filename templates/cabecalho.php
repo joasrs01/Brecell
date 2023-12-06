@@ -35,7 +35,8 @@
           <?php
           if (UsuarioRepresentante()) {
             ?>
-            <a class="btn btn-success" href="index.php?acao=cadastro-produto">Cadastrar Produtos</a>
+            <a class="btn btn-light" href="index.php?acao=cadastro-produto">Cadastrar Produtos</a>
+            <a class="btn btn-light" href="index.php?acao=cadastro-marca">Cadastrar Marca</a>
             <?php
           }
           ?>

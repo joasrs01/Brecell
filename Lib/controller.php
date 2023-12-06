@@ -59,3 +59,17 @@ function Logoff(){
     header('location: index.php');
 }
 
+function CarregarCadastroMarca(){
+    include('templates/cadastroMarca.php');
+}
+
+function CadastrarMarca(){
+    if(InserirMarca($_POST['descricao'])){
+        InserirMensagem('Marca '.$_POST['descricao'].' cadastrada com sucesso!');
+        header('location: index.php?acao=cadastro-produto');
+    }
+    else{
+        InserirMensagem('Não foi possível registrar a marca '.$_POST['descricao'].' cadastrada com sucesso!');
+        header('location: index.php?acao=cadastro-marca');
+    }
+}

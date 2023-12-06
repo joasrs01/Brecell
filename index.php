@@ -32,5 +32,11 @@
     case 'logoff':
       Logoff();
       break;
+    case 'cadastro-marca':
+      CarregarCadastroMarca();
+      break;
+    case 'cadastrar-marca':
+      CadastrarMarca();
+      break;
   }
 ?>
