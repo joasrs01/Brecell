@@ -38,5 +38,14 @@
     case 'cadastrar-marca':
       CadastrarMarca();
       break;
+    case 'remover-celular':
+      RemoverCelular();
+      break;
+    case 'editar-celular':
+      EditarCelular();
+      break;
+    case 'alterar-produto':
+      GravarAlteracaoCelular();
+      break;
   }
 ?>

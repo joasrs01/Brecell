@@ -22,29 +22,3 @@
 
         return $arrRetorno;
     }
-
-    function AtualizarDB( $arrValores, $sTabela ){
-        $arrColunas = Select("SHOW COLUMNS FROM $sTabela");
-        $sComandoInsert = "INSERT INTO $sTabela";
-        $sComandoValues = "VALUES";
-        $sValoresColuna = '';
-        $sVirgulaColuna = '';
-        $sValores = '';
-        $sVirgula = '';
-
-        foreach( $arrValores as $coluna => $valor ){
-            foreach( $arrColunas as $linhaColuna ){
-                if( $coluna == $linhaColuna['Field'] ){
-                    $sValoresColuna = $sValoresColuna.$sVirgulaTabela.$linhaColuna['Field'];
-                    $sVirgulaTabela = ', ';
-                }
-            }
-        }
-
-        foreach( $arrValores as $linha ){
-            $sValores = $sValores.$sVirgula.$valor;
-            $sVirgula = ', ';
-        }
-
-        Comando( "INSERT INTO $sTabela ($sValoresColuna) "  );
-    }

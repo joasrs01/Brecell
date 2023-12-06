@@ -22,7 +22,9 @@ function CarregarCadastroUsuario(){
     include('templates/cadastroUsuario.php');
 }
 
-function CarregarCadastroProduto(){
+function CarregarCadastroProduto($arrCelular = []){
+    $bAlteracao = count($arrCelular) > 0;
+    $celular = $arrCelular;
     include('templates/cadastroProduto.php');
 }
 
@@ -70,5 +72,35 @@ function CadastrarMarca(){
     else{
         InserirMensagem('Não foi possível registrar a marca '.$_POST['descricao'].' cadastrada com sucesso!');
         header('location: index.php?acao=cadastro-marca');
+    }
+}
+
+function RemoverCelular(){
+    if(RemoverProduto($_GET['id'])){
+        InserirMensagem('Produto removido com sucesso!');
+    }
+    else{
+        InserirMensagem('Não foi possível remover o produto');
+    }
+
+    header('location: index.php');
+}
+
+function EditarCelular(){
+    $bAlteracao = true;
+    $celular = BuscarCelular($_GET['id']);
+
+    CarregarCadastroProduto($celular);
+}
+
+function GravarAlteracaoCelular(){
+
+    if(AlterarProduto($_GET['id'], $_POST["nome"], $_POST["marca"], $_POST["preco"], ProcessarImagem($_FILES["imagem"]))){
+        InserirMensagem('Produto '.$_POST['DES_CELULAR'].' alterado com sucesso!');
+        header('location: index.php');
+    }
+    else{
+        InserirMensagem('Não foi possível alterar o produto '.$_POST['DES_CELULAR']);
+        header('location: index.php?acao=alterar-produto');
     }
 }

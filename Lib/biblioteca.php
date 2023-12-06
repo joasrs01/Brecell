@@ -3,14 +3,21 @@
 require_once('database.php');
 session_start();
 
-define('IMAGENS','resources\imagens\\');
-define('ARQUIVO_LISTA','C:\xampp\htdocs\todoList\dados\todo.json');
+define('IMAGENS','resources\celulares\\');
+
+$bAlteracao = false;
 
 /// Método irá retornar um array com os celulares
 function BuscarCelulares(){
     $sSql = 'SELECT CELULAR.COD_CELULAR, CELULAR.DES_CELULAR, CELULAR.VAL_PRECO, CELULAR.CAM_IMAGEM, MARCA.DES_MARCA FROM CELULAR';
     $sSql = $sSql.' INNER JOIN MARCA ON MARCA.COD_MARCA = CELULAR.COD_MARCA';
     return Select($sSql);
+}
+
+function BuscarCelular($iCodCelular){
+    $sSql = 'SELECT CELULAR.COD_CELULAR, CELULAR.DES_CELULAR, CELULAR.VAL_PRECO, CELULAR.CAM_IMAGEM, CELULAR.COD_MARCA FROM CELULAR';
+    $sSql = $sSql." WHERE COD_CELULAR = $iCodCelular";
+    return Select($sSql)[0];
 }
 
 function BuscarUsuarios(){
@@ -38,6 +45,15 @@ function InserirUsuario($sNome, $sLogin, $sSenha, $tipUsuario){
     }
 }
 
+function AlterarProduto( $iCodProduto, $sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
+
+    $sCaminhoImagemCorrigido = str_replace('\\','\\\\',$imgProduto);
+    $sSql = "UPDATE CELULAR SET DES_CELULAR = $sNomeProduto, VAL_PRECO = $nPrecoProduto, CAM_IMAGEM = $sCaminhoImagemCorrigido, COD_MARCA = $iMarcaProduto";
+    $sSql = $sSql." WHERE COD_CELULAR = $iCodProduto ";
+
+    return Comando( $sSql );
+}
+
 function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProduto){
 
     $sCaminhoImagemCorrigido = str_replace('\\','\\\\',$imgProduto);
@@ -45,6 +61,10 @@ function InserirProduto($sNomeProduto, $iMarcaProduto, $nPrecoProduto, $imgProdu
     $sSql = $sSql."VALUES ('$sNomeProduto', $nPrecoProduto, '$sCaminhoImagemCorrigido', $iMarcaProduto)";
 
     return Comando( $sSql );
+}
+
+function RemoverProduto($iCodProduto){
+    return Comando( "DELETE FROM CELULAR WHERE COD_CELULAR = $iCodProduto" );
 }
 
 function InserirMarca($sDescricaoMarca){

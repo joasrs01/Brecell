@@ -20,8 +20,8 @@
                     <?php
                         if(UsuarioLogado() && UsuarioRepresentante()){
                         ?>
-                            <li><input id="<?= $celular['COD_CELULAR'] ?>" class="btn btn-danger excluir-item" type="button" value="Excluir" /></li>
-                            <li><input id="<?= $celular['COD_CELULAR'] ?>" class="btn btn-secondary" class="editar-item" type="button" value="Editar" /></li>
+                            <li><a class="btn btn-danger excluir-item" href="?acao=remover-celular&id=<?= $celular['COD_CELULAR'] ?>">Excluir</a></li>
+                            <li><a class="btn btn-secondary editar-item" href="?acao=editar-celular&id=<?= $celular['COD_CELULAR'] ?>">Editar</a></li>
                         <?php
                         }
                     ?>
